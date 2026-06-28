@@ -1,0 +1,1 @@
+{"student_id":"A22MJ3007","courses":["SECJ2203","UKQF2XX2","SECJ3323","SECJ3303","SECR2043","SECJ2013"],"credits":17}

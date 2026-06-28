@@ -1,0 +1,12 @@
+# dependencies
+backend/vendor/
+frontend/node_modules/
+
+# uploads (runtime files)
+backend/uploads/
+
+# build output
+frontend/dist/
+
+# environment
+.env
