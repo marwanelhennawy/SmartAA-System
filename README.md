@@ -73,11 +73,12 @@ SmartAA-System/
 │
 ├── backend/                  # deployed as SMARTAA-FULLSTACK/ under htdocs
 │   ├── api/                  # REST API endpoints
-│   ├── config/
-│   │   └── database.php      # DB host / name / username / password
 │   ├── services/             # Business logic (PDF, validation)
 │   ├── assets/                # CSS/JS
 │   ├── uploads/               # Uploaded PDF files
+│   ├── composer.json          # PHP dependency declarations
+│   ├── composer.lock           # locked dependency versions
+│   ├── db_connect.php          # DB host / name / username / password
 │   └── index.html
 │
 ├── frontend/
@@ -122,12 +123,23 @@ Or download the ZIP from GitHub and extract it.
   http://localhost/SMARTAA-FULLSTACK/backend/
   ```
 
-### 4. Database Setup (MySQL)
+### 4. Install Backend Dependencies (Composer)
+
+The backend ships with `composer.json` and `composer.lock`, but the actual dependency files (`vendor/`) are not committed to the repo — install them locally:
+
+```bash
+cd backend
+composer install
+```
+
+This reads `composer.lock` and downloads the exact dependency versions into a `vendor/` folder. Without this step the backend will throw an error such as `Failed to open stream: vendor/autoload.php`.
+
+### 5. Database Setup (MySQL)
 
 - Open phpMyAdmin: `http://localhost/phpmyadmin`
 - Click **Import** → select `smartaa.sql` → click **Go**
 - This creates a `smartaa` database with all required tables and sample data
-- Open `backend/config/database.php` and confirm it matches your local setup:
+- Open `backend/db_connect.php` and confirm it matches your local setup:
   ```php
   $host = "localhost";
   $dbname = "smartaa";
@@ -135,7 +147,7 @@ Or download the ZIP from GitHub and extract it.
   $password = "";
   ```
 
-### 5. Frontend Setup
+### 6. Frontend Setup
 
 ```bash
 cd frontend
@@ -144,7 +156,7 @@ npm run dev
 ```
 The terminal will show a local URL, typically `http://localhost:5173`.
 
-### 6. Running the System
+### 7. Running the System
 
 Two services must be running at the same time:
 
@@ -153,7 +165,7 @@ Two services must be running at the same time:
 
 Then open your browser to `http://localhost:5173`.
 
-### 7. Login Credentials
+### 8. Login Credentials
 
 Sample student account (from the seeded database):
 ```
@@ -186,7 +198,8 @@ Validates course eligibility before submission:
 | Issue | Fix |
 |---|---|
 | Frontend not loading | `cd frontend && npm install && npm run dev` |
-| Database connection error | Verify Apache and MySQL are running, and the database name is `smartaa` |
+| `vendor/autoload.php` not found | Run `cd backend && composer install` |
+| Database connection error | Verify Apache and MySQL are running, the database name is `smartaa`, and credentials in `db_connect.php` are correct |
 | API errors | Confirm the backend folder exists at `C:\xampp\htdocs\SMARTAA-FULLSTACK\` and API URLs load in the browser |
 | Blank page | Open DevTools (F12) → Console tab for JavaScript errors |
 
