@@ -63,9 +63,7 @@ function getStudentInfo(mysqli $conn, string $student_id) {
     ];
 }
 
-/**
- * MAIN PREREQUISITE CHECK ENGINE (FIXED)
- */
+
 function checkPrerequisites(mysqli $conn, string $student_id, int $course_id) {
 
     $student = getStudentInfo($conn, $student_id);

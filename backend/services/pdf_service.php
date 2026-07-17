@@ -162,6 +162,9 @@ function processPDF(
         }
     }
 
+ 
+error_log($text);
+    
     return [
         "semester" => $semester,
         "session" => $session,

@@ -4,6 +4,7 @@ frontend/node_modules/
 
 # uploads (runtime files)
 backend/uploads/
+backend/api/debug_log.txt
 
 # build output
 frontend/dist/
